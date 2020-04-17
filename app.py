@@ -29,6 +29,25 @@ def add_user():
         return notfound()
 
 
+@app.route('/update/<id>', methods=['PUT'])
+def update_user(id):
+    _id = id
+    _json = request.json
+    _name = _json['name']
+    _email = _json['email']
+    _password = _json['pwd']
+
+    if _name and _email and _password and _id and request.method == 'PUT':
+        _hashed_password = generate_password_hash(_password)
+        mongo.db.user.update_one({'_id': ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(
+            _id)}, {'$set':  {'name': _name, "email": _email, "pwd": _hashed_password}})
+        response = jsonify("User updated successfully")
+        response.status_code = 200
+        return response
+    else:
+        return notfound()
+
+
 @app.route('/users')
 def users():
     users = mongo.db.user.find()
