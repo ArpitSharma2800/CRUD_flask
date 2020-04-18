@@ -4,11 +4,13 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from flask import jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
-app.sceret_key = "arpit"
-app.config['MONGO_URI'] = "mongodb+srv://details:Iluvmuma11@cluster0-jxbq8.azure.mongodb.net/test?retryWrites=true&w=majority"
+app.sceret_key = os.environ['SECERT']
+app.config['MONGO_URI'] = os.environ['DB']
 mongo = PyMongo(app)
+# print(os.environ['DB'])
 
 
 @app.route('/add', methods=['POST'])
@@ -23,7 +25,7 @@ def add_user():
     if _name and _email and _password and _gender and _category and request.method == 'POST':
         users = mongo.db.user.find_one({'email': _email})
         if(users):
-            response = jsonify("Already")
+            response = jsonify("email already exist")
             response.status_code = 200
             return response
 
