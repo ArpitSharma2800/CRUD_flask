@@ -16,9 +16,11 @@ def add_user():
     _json = request.json
     _name = _json['name']
     _email = _json['email']
+    _gender = _json['gender']
     _password = _json['pwd']
+    _category = _json['category']
 
-    if _name and _email and _password and request.method == 'POST':
+    if _name and _email and _password and _gender and _category and request.method == 'POST':
         users = mongo.db.user.find_one({'email': _email})
         if(users):
             response = jsonify("Already")
@@ -27,7 +29,7 @@ def add_user():
 
         _hashed_password = generate_password_hash(_password)
         id = mongo.db.user.insert(
-            {'name': _name, "email": _email, "pwd": _hashed_password})
+            {'name': _name, "email": _email, 'gender': _gender, 'category': _category, "pwd": _hashed_password})
         response = jsonify("User added successfully")
         response.status_code = 200
         return response
