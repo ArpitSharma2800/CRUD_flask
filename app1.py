@@ -6,9 +6,14 @@ schema = JsonSchema(app)  # initialing jsonSchema
 
 # example JSON schema
 todo_schema = {
-    'required': ['list'],
+    'required': ['list', 'name'],
     'properties': {
+        'name': {'type': 'string'},
         'list': {
+            'todo': {'type': 'string'},
+            'priority': {'type': 'integer'},
+        },
+        'secondary': {
             'todo': {'type': 'string'},
             'priority': {'type': 'integer'},
         }
