@@ -11,6 +11,14 @@ app.sceret_key = os.environ['SECERT']
 app.config['MONGO_URI'] = os.environ['DB']
 mongo = PyMongo(app)
 
+pipeline = [
+    {
+        '$group': {
+            '_id': {"name": "$name"}
+        }
+    }
+]
+
 
 @app.route('/add', methods=['POST'])
 def add_user():
@@ -59,7 +67,7 @@ def update_user(id):
 
 @app.route('/users')
 def users():
-    users = mongo.db.user.find()
+    users = mongo.db.user.aggregate(pipeline)
     resp = dumps(users)
     return resp
 
