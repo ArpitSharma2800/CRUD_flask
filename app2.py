@@ -10,7 +10,6 @@ app = Flask(__name__)
 app.sceret_key = os.environ['SECERT']
 app.config['MONGO_URI'] = os.environ['DB']
 mongo = PyMongo(app)
-# print(os.environ['DB'])
 
 
 @app.route('/add', methods=['POST'])
