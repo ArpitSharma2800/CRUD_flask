@@ -6,14 +6,11 @@ client = MongoClient(
 
 pipeline = [
     {
-        '$group': {
-            '_id': {"language": "$language"},
-            'count': {'$sum': 1}
-        }
+        '$sortByCount': '$language'
     },
     {
-        '$sort': {
-            "count": -1
+        '$facet': {
+            'most used language': [{'$limit': 10}]
         }
     }
 ]
