@@ -67,6 +67,13 @@ def update_user(id):
 
 @app.route('/users')
 def users():
+    users = mongo.db.user.find()
+    resp = dumps(users)
+    return resp
+
+
+@app.route('/users/name')
+def users_name():
     users = mongo.db.user.aggregate(pipeline)
     resp = dumps(users)
     return resp
