@@ -17,20 +17,7 @@ pipeline = [
                 ]
             }
         }
-    },
-    # {
-    #     '$facet': {
-    #         'most used language': [{'$limit': 10}],
-    #         'top5': [{'$bucketAuto': {
-    #             'groupBy': '$count',
-    #             'buckets': 5,
-    #             'output': {
-    #                 'language combination': {'$sum': 1},
-    #                 "titles": {'$push': "$year"}
-    #             }
-    #         }}]
-    #     }
-    # }
+    }
     {
         '$project': {
             '_id': 1,
