@@ -8,6 +8,16 @@ pipeline = [
     {
         '$limit': 20
     },
+    {
+        '$addFields': {
+            'lastupdated': {
+                '$arrayElemAt': [
+                    {'$split': ["$lastupdated", "."]},
+                    0
+                ]
+            }
+        }
+    },
     # {
     #     '$facet': {
     #         'most used language': [{'$limit': 10}],
@@ -26,7 +36,17 @@ pipeline = [
             '_id': 1,
             'title': 1,
             'year': 1,
-            'released': 1,
+            'released': {
+                '$cond': {
+                    'if': {'$ne': ["$released", ""]},
+                    'then':{
+                        '$dateFromString': {
+                            'dateString': "$released"
+                        }
+                    },
+                    'else': ""
+                }
+            },
             'runtime': 1,
             'rated': "$rating",
             'country': 1,
@@ -42,7 +62,18 @@ pipeline = [
                 'rating': "$imdbRating",
                 'votes': "$imdbVotes"
             },
-            'lastUpdated': "$lastupdated"
+            'lastUpdated': {
+                '$cond': {
+                    'if': {'$ne': ["$lastupdated", ""]},
+                    'then':{
+                        '$dateFromString': {
+                            'dateString': "$lastupdated",
+                            'timezone': "America/New_York"
+                        }
+                    },
+                    'else': ""
+                }
+            }
         }
     },
     {
