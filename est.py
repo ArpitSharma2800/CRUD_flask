@@ -7,7 +7,7 @@ import re
 client = MongoClient(
     "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/test?retryWrites=true&w=majority")
 
-batch = 1000
+batch = 100
 updates = []
 count = 0
 

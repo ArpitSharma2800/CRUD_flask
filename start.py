@@ -17,7 +17,7 @@ pipeline = [
                 ]
             }
         }
-    }
+    },
     {
         '$project': {
             '_id': 1,
