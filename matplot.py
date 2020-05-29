@@ -2,8 +2,7 @@ from pymongo import MongoClient
 import matplotlib.pyplot as plt
 from IPython.display import clear_output
 import pprint
-client = MongoClient(
-    "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient(MONGO_URL)
 
 moviees = client.users.movies_initial.aggregate([
     {"$limit": 20}
