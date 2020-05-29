@@ -8,8 +8,7 @@ BATCH_SIZE = 100  # Batch size for batch updating with bulk_write()
 count = 0
 
 
-client = MongoClient(
-    "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/peopleraw?retryWrites=true&w=majority")
+client = MongoClient(MONGO_URL)
 
 print(client.peopleraw.people.count_documents(
     {'birthday': {'$type': 'string'}}))
