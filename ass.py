@@ -1,7 +1,6 @@
 import pymongo
 import pprint
-free_tier_client = pymongo.MongoClient(
-    "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/peopleraw?retryWrites=true&w=majority")
+free_tier_client = pymongo.MongoClient(MONGO_URL)
 people = free_tier_client.cleansing["people-raw"]
 
 
