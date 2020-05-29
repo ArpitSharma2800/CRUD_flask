@@ -1,8 +1,7 @@
 from pymongo import MongoClient
 from IPython.display import clear_output
 import pprint
-client = MongoClient(
-    "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient(MONGO_URL)
 
 pipeline = [
     {
