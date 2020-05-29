@@ -1,8 +1,7 @@
 from pymongo import MongoClient
 import pprint
 # We're just reading data, so we can use the course cluster
-client = MongoClient(
-    "mongodb+srv://arpit:iluvmuma@arpit-xcm5n.gcp.mongodb.net/peopleraw?retryWrites=true&w=majority")
+client = MongoClient(MONGO_URL)
 
 pipeline = [
     {
